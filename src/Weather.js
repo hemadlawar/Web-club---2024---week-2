@@ -70,44 +70,70 @@ const Weather = () => {
   };
 
   return (
-    <div>
-      <div>
-        {" "}
-        <button onClick={convertToKurdish}>كوردی </button>
-        <button onClick={convertToEnglish}>English </button>
+    <div className="p-4">
+      {/**buttons for converting languages */}
+      <div className="flex mb-4 flex justify-end">
+        <button
+          className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5"
+          onClick={convertToKurdish}
+        >
+          كوردی
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={convertToEnglish}
+        >
+          English
+        </button>
       </div>
-      <h1>{titles.headers}</h1>
-      <form onSubmit={handleSubmit}>
+      {/** headers title  */}
+      <h1 className="text-3xl font-bold mb-5  flex justify-center">
+        {titles.headers}
+      </h1>
+      <form onSubmit={handleSubmit} className="mb-4 flex justify-center">
         <input
           type="text"
           placeholder="Enter city name"
           value={city}
           onChange={handleInputChange}
+          className="border border-gray-400 rounded px-4 py-2 "
         />
-        <button type="submit">{titles.Get_Weather}</button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+        >
+          {titles.Get_Weather}
+        </button>
       </form>
       {weatherData ? (
         <>
-          <h2>{weatherData.name}</h2>
-          <p>
-            {titles.Temperature}: {weatherData.main.temp}°C
-          </p>
-          <p>
-            {titles.Description}: {weatherData.weather[0].description}
-          </p>
-          <p>
-            {titles.Feels_like} : {weatherData.main.feels_like}°C
-          </p>
-          <p>
-            {" "}
-            {titles.Humidity} : {weatherData.main.humidity}%
-          </p>
-          <p>
-            {titles.Pressure} : {weatherData.main.pressure}
-          </p>
-          <p>
-            {titles.Wind_Speed} : {weatherData.wind.speed}m/s
-          </p>
+          <div className=" ml-custom mt-7">
+            <h2 className="text-xl font-bold mb-2">{weatherData.name}</h2>
+            <p>
+              <span className="font-bold">{titles.Temperature}:</span>{" "}
+              {weatherData.main.temp}°C
+            </p>
+            <p>
+              <span className="font-bold">{titles.Description}:</span>{" "}
+              {weatherData.weather[0].description}
+            </p>
+            <p>
+              <span className="font-bold">{titles.Feels_like} :</span>{" "}
+              {weatherData.main.feels_like} °C
+            </p>
+            <p>
+              <span className="font-bold">{titles.Humidity} :</span>{" "}
+              {weatherData.main.humidity}%
+            </p>
+            <p>
+              <span className="font-bold">{titles.Pressure} :</span>{" "}
+              {weatherData.main.pressure}
+            </p>
+            <p>
+              <span className="font-bold">{titles.Wind_Speed} :</span>{" "}
+              {weatherData.wind.speed}m/s
+            </p>
+          </div>
         </>
       ) : (
         <p>Loading weather data...</p>
