@@ -70,7 +70,7 @@ const Weather = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4   bg-[url('https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg')] w-full  h-screen bg-cover">
       {/**buttons for converting languages */}
       <div className="flex mb-4 flex justify-end">
         <button
@@ -87,7 +87,7 @@ const Weather = () => {
         </button>
       </div>
       {/** headers title  */}
-      <h1 className="text-3xl font-bold mb-5  flex justify-center">
+      <h1 className="text-3xl font-bold mb-5  flex justify-center text-yellow-50 mb-16">
         {titles.headers}
       </h1>
       <form onSubmit={handleSubmit} className="mb-4 flex justify-center">
@@ -136,7 +136,7 @@ const Weather = () => {
           </div>
         </>
       ) : (
-        <p>Loading weather data...</p>
+        <p></p>
       )}
     </div>
   );
