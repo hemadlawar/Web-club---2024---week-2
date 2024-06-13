@@ -31,7 +31,7 @@ const Weather = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -140,7 +140,7 @@ const Weather = () => {
           </div>
         </>
       ) : (
-        <p className="mt-96">By Hema DO</p>
+        <p className=" text-center mt-custom2 text-white">By Hema DO</p>
       )}
     </div>
   );
