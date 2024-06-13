@@ -140,7 +140,7 @@ const Weather = () => {
           </div>
         </>
       ) : (
-        <p></p>
+        <p className="mt-96">By Hema DO</p>
       )}
     </div>
   );
