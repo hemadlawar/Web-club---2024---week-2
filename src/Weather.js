@@ -17,21 +17,24 @@ const Weather = () => {
     Pressure: "Pressure",
     Wind_Speed: "Wind Speed",
   });
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
-      );
-      setWeatherData(response.data);
-      console.log(response.data); //You can see all the weather data in console log
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      if (city) {
+        try {
+          const response = await axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+          );
+          setWeatherData(response.data);
+          console.log(response.data); // You can see all the weather data in console log
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
     fetchData();
-  }, [fetchData]);
+  }, [city, apiKey]); // Adding city and apiKey as dependencies
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -39,13 +42,12 @@ const Weather = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData();
+    // fetchData will be called by useEffect when city changes
   };
 
   const convertToKurdish = () => {
     setTitles({
       headers: "پلاتفۆرمی كه‌ش و هه‌وا",
-
       Get_Weather: "زانینی كه‌ش و هه‌وا",
       Temperature: "پله‌ی گه‌رمی",
       Description: "وەسف",
@@ -70,9 +72,9 @@ const Weather = () => {
   };
 
   return (
-    <div className="p-4   bg-[url('https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg')] w-full  h-screen bg-cover">
+    <div className="p-4 bg-[url('https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg')] w-full h-screen bg-cover">
       {/**buttons for converting languages */}
-      <div className="flex mb-4 flex justify-end">
+      <div className="flex mb-4 justify-end">
         <button
           className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5"
           onClick={convertToKurdish}
@@ -87,7 +89,7 @@ const Weather = () => {
         </button>
       </div>
       {/** headers title  */}
-      <h1 className="text-3xl font-bold mb-5  flex justify-center text-yellow-50 mb-16">
+      <h1 className="text-3xl font-bold mb-5 flex justify-center text-yellow-50 mb-16">
         {titles.headers}
       </h1>
       <form onSubmit={handleSubmit} className="mb-4 flex justify-center">
@@ -96,7 +98,7 @@ const Weather = () => {
           placeholder="Enter city name"
           value={city}
           onChange={handleInputChange}
-          className="border border-gray-400 rounded px-4 py-2 "
+          className="border border-gray-400 rounded px-4 py-2"
         />
         <button
           type="submit"
@@ -107,40 +109,38 @@ const Weather = () => {
       </form>
       {weatherData ? (
         <>
-          <div className=" ml-custom mt-7">
+          <div className="ml-custom mt-7">
             <h2 className="text-xl font-bold mb-2 text-white">
               {weatherData.name}
             </h2>
             <p className="text-white">
-              <span className="font-bold   ">{titles.Temperature}:</span>{" "}
+              <span className="font-bold">{titles.Temperature}:</span>{" "}
               {weatherData.main.temp}°C
             </p>
             <p className="text-white">
-              <span className="font-bold ">{titles.Description}:</span>{" "}
+              <span className="font-bold">{titles.Description}:</span>{" "}
               {weatherData.weather[0].description}
             </p>
             <p className="text-white">
-              <span className="font-bold  ">{titles.Feels_like} :</span>{" "}
+              <span className="font-bold">{titles.Feels_like}:</span>{" "}
               {weatherData.main.feels_like} °C
             </p>
             <p className="text-white">
-              <span className="font-bold " text-white>
-                {titles.Humidity} :
-              </span>{" "}
+              <span className="font-bold">{titles.Humidity}:</span>{" "}
               {weatherData.main.humidity}%
             </p>
             <p className="text-white">
-              <span className="font-bold  ">{titles.Pressure} :</span>{" "}
+              <span className="font-bold">{titles.Pressure}:</span>{" "}
               {weatherData.main.pressure}
             </p>
             <p className="text-white">
-              <span className="font-bold  ">{titles.Wind_Speed} :</span>{" "}
-              {weatherData.wind.speed}m/s
+              <span className="font-bold">{titles.Wind_Speed}:</span>{" "}
+              {weatherData.wind.speed} m/s
             </p>
           </div>
         </>
       ) : (
-        <p className=" text-center mt-custom2 text-white">By Hema DO</p>
+        <p className="text-center mt-custom2 text-white">By Hema DO</p>
       )}
     </div>
   );
