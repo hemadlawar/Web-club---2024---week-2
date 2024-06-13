@@ -108,29 +108,33 @@ const Weather = () => {
       {weatherData ? (
         <>
           <div className=" ml-custom mt-7">
-            <h2 className="text-xl font-bold mb-2">{weatherData.name}</h2>
-            <p>
-              <span className="font-bold">{titles.Temperature}:</span>{" "}
+            <h2 className="text-xl font-bold mb-2 text-white">
+              {weatherData.name}
+            </h2>
+            <p className="text-white">
+              <span className="font-bold   ">{titles.Temperature}:</span>{" "}
               {weatherData.main.temp}°C
             </p>
-            <p>
-              <span className="font-bold">{titles.Description}:</span>{" "}
+            <p className="text-white">
+              <span className="font-bold ">{titles.Description}:</span>{" "}
               {weatherData.weather[0].description}
             </p>
-            <p>
-              <span className="font-bold">{titles.Feels_like} :</span>{" "}
+            <p className="text-white">
+              <span className="font-bold  ">{titles.Feels_like} :</span>{" "}
               {weatherData.main.feels_like} °C
             </p>
-            <p>
-              <span className="font-bold">{titles.Humidity} :</span>{" "}
+            <p className="text-white">
+              <span className="font-bold " text-white>
+                {titles.Humidity} :
+              </span>{" "}
               {weatherData.main.humidity}%
             </p>
-            <p>
-              <span className="font-bold">{titles.Pressure} :</span>{" "}
+            <p className="text-white">
+              <span className="font-bold  ">{titles.Pressure} :</span>{" "}
               {weatherData.main.pressure}
             </p>
-            <p>
-              <span className="font-bold">{titles.Wind_Speed} :</span>{" "}
+            <p className="text-white">
+              <span className="font-bold  ">{titles.Wind_Speed} :</span>{" "}
               {weatherData.wind.speed}m/s
             </p>
           </div>
